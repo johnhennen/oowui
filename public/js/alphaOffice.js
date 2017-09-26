@@ -66,7 +66,9 @@ $(document).ready(function () {
     // Create a template for the product panels.  There are 4 product panels per row on the main page.  In order have the popup panel used in the animation look identical to the 
     // product panels, the product panel template is extracted from the popup panel.  The template is contained in popupHTLMArray[0] and popupHTLMArray[1].
     // The generic template is created by removing syntax specific to the popup panel.
-    function buildHTML() {    
+    function buildHTML() { 
+        var i;  
+        var j; 
         tweetTableTemplateVar = document.getElementById("tweetTableFillerDiv").innerHTML; // To be used later for formatting Tweet data in the popup
         popupHTLMArray = document.getElementById("popupTable").innerHTML.split("~");
         popupHTLMArray[0] = popupHTLMArray[0].replace(" id=\"popupProductC4R1Spacer\"", "");
@@ -169,9 +171,10 @@ var incrementFactorArray = new Array();
 var incrementFactorSumVar = 2;
 incrementFactorArray[0] = 2
 // Calculate curved path for popup animation (done once on initial load).
-for (i = 1; i < transitionPositionStepsVar; i++) {
-    incrementFactorArray[i] = Math.pow(incrementFactorArray[(i - 1)], transitionCurveVar);
-    incrementFactorSumVar = incrementFactorSumVar + incrementFactorArray[i];
+var z;
+for (z = 1; z < transitionPositionStepsVar; z++) {
+    incrementFactorArray[z] = Math.pow(incrementFactorArray[(z - 1)], transitionCurveVar);
+    incrementFactorSumVar = incrementFactorSumVar + incrementFactorArray[z];
 }
 var transitionIndexVar;
 var currentTopVar;
@@ -342,27 +345,29 @@ function getTwitter(harshtagParm) {
 
 // Create the Tweet table HTML based on the tweetHTML strings.  Sort this array and then create the final Tweet table HTML.
 function buildTwitterHTML(sortParm) {
-        var sortHiddenStringVar;        
-        var tweetSortArray = new Array();  
-        var tweetString = "";          
-        for (i = 0; i < twitterArray.length; i++) {  
-            if (sortParm == 1) {sortHiddenStringVar = twitterArray[i].screenName.toUpperCase();}
-            if (sortParm == 2) {sortHiddenStringVar = twitterArray[i].tweetText.toUpperCase();}
-            if (sortParm == 3) {sortHiddenStringVar = twitterArray[i].tweetTimestamp;}           
-            tweetSortArray[i] = sortHiddenStringVar + "^*^" +  twitterArray[i].tweetHTML;
-        }
-        tweetSortArray.sort(); 
-        for (i = 0; i < twitterArray.length; i++) {                          
-            tweetString = tweetString + tweetSortArray[i].substr(tweetSortArray[i].indexOf('^*^') + 3);  
-        }
-        tweetString = tweetString + "<br /><br />";        
-        document.getElementById("popupTwitterContentDiv").innerHTML = tweetString;        
-        document.getElementById("popupTwitterContentDiv").scrollTo(0, 0);                
-        document.getElementById("tweetNumberLabel").innerHTML = indexVar + " Tweets Total";
+    var i;   
+    var sortHiddenStringVar;        
+    var tweetSortArray = new Array();  
+    var tweetString = "";          
+    for (i = 0; i < twitterArray.length; i++) {  
+        if (sortParm == 1) {sortHiddenStringVar = twitterArray[i].screenName.toUpperCase();}
+        if (sortParm == 2) {sortHiddenStringVar = twitterArray[i].tweetText.toUpperCase();}
+        if (sortParm == 3) {sortHiddenStringVar = twitterArray[i].tweetTimestamp;}           
+        tweetSortArray[i] = sortHiddenStringVar + "^*^" +  twitterArray[i].tweetHTML;
+    }
+    tweetSortArray.sort(); 
+    for (i = 0; i < twitterArray.length; i++) {                          
+        tweetString = tweetString + tweetSortArray[i].substr(tweetSortArray[i].indexOf('^*^') + 3);  
+    }
+    tweetString = tweetString + "<br /><br />";        
+    document.getElementById("popupTwitterContentDiv").innerHTML = tweetString;        
+    document.getElementById("popupTwitterContentDiv").scrollTo(0, 0);                
+    document.getElementById("tweetNumberLabel").innerHTML = indexVar + " Tweets Total";
 }
 
 // Format the raw tweet text.
 function formatTweetText(stringParm) { 
+    var j;
     var tweetVar = "  " + stringParm + "  "; 
     var locationVar;
     var linkTextVar = "";
