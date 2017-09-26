@@ -3,11 +3,13 @@
 /*********************************************************    
 CHANGE THE URLS BELOW FOR THE WORKSHOP - THESE URLS MUST POINT TO THE MICROSERVICES.      
 *********************************************************/ 
+
 // URL for the MySQL database REST service
 var dbServiceURL = "https://notactivated";
 
 // URL for the Twitter REST service
 var tweetServiceBaseURL = "https://notactivated";
+
 /*********************************************************    
 CHANGE THE URLS ABOVE FOR THE WORKSHOP.    
 *********************************************************/ 
@@ -56,7 +58,7 @@ $(document).ready(function () {
             buildHTML();
         }
         catch(err){
-            console.log("Error retrieving the Product data from the JSON Endpoint.")
+            console.log("Error retrieving the Product data from the JSON Endpoint.");
         }
     });
 
@@ -78,7 +80,7 @@ $(document).ready(function () {
         $.each(holder.Products, function(index, details) { 
             productArray[details.PRODUCT_ID] = {parent_category_id: details.PARENT_CATEGORY_ID, category_id: details.CATEGORY_ID,
                 product_name: details.PRODUCT_NAME, product_status: details.PRODUCT_STATUS, list_price: details.LIST_PRICE,
-                warranty_period_months: details.WARRANTY_PERIOD_MONTHS, external_url: details.EXTERNAL_URL, hashtag: details.TWITTER_TAG}                                                                              
+                warranty_period_months: details.WARRANTY_PERIOD_MONTHS, external_url: details.EXTERNAL_URL, hashtag: details.TWITTER_TAG};                                                                              
             productIndexArray[indexVar] = details.PRODUCT_ID;             
             indexVar = indexVar + 1;                   
         });
@@ -371,13 +373,13 @@ function formatTweetText(stringParm) {
         var linkString = "";
         var textString = "";
     }    
-    tweetVar = tweetVar.replace(/�/g, "'");
-    tweetVar = tweetVar.replace(/�H1/g, '');    
-    tweetVar = tweetVar.replace(/�H2/g, ''); 
-    tweetVar = tweetVar.replace(/�H3/g, '');     
-    tweetVar = tweetVar.replace(/�S1/g, '');     
-    tweetVar = tweetVar.replace(/�S2/g, '');        
-    tweetVar = tweetVar.replace(/�S3/g, '');    
+    tweetVar = tweetVar.replace(/ï¿½/g, "'");
+    tweetVar = tweetVar.replace(/ï¿½H1/g, '');    
+    tweetVar = tweetVar.replace(/ï¿½H2/g, ''); 
+    tweetVar = tweetVar.replace(/ï¿½H3/g, '');     
+    tweetVar = tweetVar.replace(/ï¿½S1/g, '');     
+    tweetVar = tweetVar.replace(/ï¿½S2/g, '');        
+    tweetVar = tweetVar.replace(/ï¿½S3/g, '');    
     tweetVar = tweetVar.replace(/#/g, '^^#');
     tweetVar = tweetVar.replace(/@/g, '^^@');
     tweetVar = tweetVar.replace(/http:\/\//g, '^^http://');
@@ -444,4 +446,3 @@ function getBrowser(){
         return M[0];
     }    
 }
-
